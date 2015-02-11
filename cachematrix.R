@@ -11,24 +11,21 @@
 ## where the input variable x (matrix) and the local variable i (inverse matrix) are stored (lexical scoping rule)
 
 makeCacheMatrix <- function(x = matrix()) {
-
+        
         ## inverse matrix initialized
         i <- NULL
         
-        ## return the matrix (function)
+        ## constructs the 4 functions
         getMat <- function() x 
-        
-        ## set a new value in the matrix and initialize the inverse matrix (function)
+
         setMat <- function(mat) {
                 x <<- mat
                 i <<- NULL
                 message("matrix set to new value and inverse matrix initialized")
         }
         
-        ## return the inverse matrix (function)
         getInv <- function() i
         
-        ## set the value of the inverse matrix (function)
         setInv <- function(inv) i <<- inv
 
         ## return a list with the 4 functions
@@ -44,7 +41,7 @@ makeCacheMatrix <- function(x = matrix()) {
 
 cacheSolve <- function(x, ...) {
         
-        ## get the inverse matrix in the cache
+        ## get the inverse matrix from the cache
         inv <- x$getInv()
         
         ## if calculated, return it
@@ -53,19 +50,12 @@ cacheSolve <- function(x, ...) {
                 return(inv)
         }
         
-        ## if not calculated, solve it, cache it and return it
-        
-        ## get the matrix
+        ## if not calculated, get the matrix, solve it, and cache the inverse matrix        
         mat <- x$getMat()
-        
-        ## solve the matrix
-        inv <- solve(mat)
-        
-        ## cache the inverse matrix
+        inv <- solve(mat,...)
         x$setInv(inv)
         
-        message("inverse matrix calculated and cached")
-        
         ## return the inverse matrix
+        message("inverse matrix calculated and cached")
         inv
 }
