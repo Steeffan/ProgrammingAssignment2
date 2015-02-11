@@ -52,7 +52,7 @@ cacheSolve <- function(x, ...) {
         
         ## if not calculated, get the matrix, solve it, and cache the inverse matrix        
         mat <- x$getMat()
-        inv <- solve(mat,...)
+        inv <- solve(mat, ...)
         x$setInv(inv)
         
         ## return the inverse matrix
