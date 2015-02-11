@@ -5,7 +5,7 @@
 ## makeCacheMatrix returns a list of 4 functions (getMat, setMat, getInv, setInv)
 ## when the function is called, due to the lexical scopus rules, the variables x (matrix) and i (inverse) are stored
 ## in the environment where the functions are created. This environment is a child of the global environment and it is referenced in
-## the returned list
+## the list returned when makeCacheMatrix is invoked
 
 makeCacheMatrix <- function(x = matrix()) {
 
