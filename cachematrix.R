@@ -3,30 +3,30 @@
 
 
 ## makeCacheMatrix constructs 4 functions and returns them in a list
-## getMat and getInv return respectively the value of the matrix x and the inverse matrix i
-## setMat set the value of the matrix x and initialize the inverse matrix i to NULL
-## setInv set the value of the inverse matrix i
+## getMat and getInv return respectively the value of the matrix mat and the inverse matrix inv
+## setMat sets the value of the matrix mat to a new value and initializes the inverse matrix inv to NULL
+## setInv sets the value of the inverse matrix inv
 
 ## When makeCacheMatrix is invoked, it creates these 4 functions in a specific environment (child of the global environment)
-## where the input variable x (matrix) and the local variable i (inverse matrix) are stored (lexical scoping rule)
+## where the variables mat (matrix) and inv (inverse matrix) are stored (or cached) (lexical scoping rule)
 
-makeCacheMatrix <- function(x = matrix()) {
+makeCacheMatrix <- function(mat = matrix()) {
         
         ## inverse matrix initialized
-        i <- NULL
+        inv <- NULL
         
         ## constructs the 4 functions
-        getMat <- function() x 
+        getMat <- function() mat
 
-        setMat <- function(mat) {
-                x <<- mat
-                i <<- NULL
+        setMat <- function(newMat) {
+                mat <<- newMat
+                inv <<- NULL
                 message("matrix set to new value and inverse matrix initialized")
         }
         
-        getInv <- function() i
+        getInv <- function() inv
         
-        setInv <- function(inv) i <<- inv
+        setInv <- function(invMat) inv <<- invMat
 
         ## return a list with the 4 functions
         list(getMat = getMat, setMat = setMat, getInv = getInv, setInv = setInv)
